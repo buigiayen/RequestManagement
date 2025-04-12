@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+  # SQL Server service
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    container_name: sqlserver
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=YourStrong@Passw0rd
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqlserver_data:/var/opt/mssql
+    networks:
+      - request-management-network
+
+  # Backend API service
+  backend:
+    build:
+      context: ./Backend
+      dockerfile: Dockerfile
+    container_name: backend-api
+    ports:
+      - "5000:80"
+    depends_on:
+      - sqlserver
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=RequestManagementDB;User Id=sa;Password=YourStrong@Passw0rd;TrustServerCertificate=True;
+    networks:
+      - request-management-network
+
+  # Frontend service
+  frontend:
+    build:
+      context: ./Frontend
+      dockerfile: Dockerfile
+    container_name: frontend-client
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    environment:
+      - NEXT_PUBLIC_API_URL=http://backend:5000
+    networks:
+      - request-management-network
+
+networks:
+  request-management-network:
+    driver: bridge
+
+volumes:
+  sqlserver_data:

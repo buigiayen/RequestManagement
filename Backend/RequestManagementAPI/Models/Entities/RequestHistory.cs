@@ -1,0 +1,20 @@
+using System;
+
+namespace RequestManagementAPI.Models.Entities
+{
+    public class RequestHistory
+    {
+        public int HistoryId { get; set; }
+        public int RequestId { get; set; }
+        public int UserId { get; set; }
+        public string ChangeType { get; set; }
+        public string OldValue { get; set; }
+        public string NewValue { get; set; }
+        public DateTime ChangedAt { get; set; } = DateTime.UtcNow;
+        public string Description { get; set; }
+
+        // Navigation properties
+        public virtual Request Request { get; set; }
+        public virtual User User { get; set; }
+    }
+}
