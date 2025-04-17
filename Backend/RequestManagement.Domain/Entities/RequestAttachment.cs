@@ -1,9 +1,10 @@
-using System;
+using System.ComponentModel.DataAnnotations;
 
-namespace RequestManagementAPI.Models.Entities
+namespace RequestManagement.Domain.Models.Entities
 {
     public class RequestAttachment
     {
+        [Key]
         public int AttachmentId { get; set; }
         public int RequestId { get; set; }
         public string FileName { get; set; }

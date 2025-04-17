@@ -1,10 +1,10 @@
-using System;
-using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
-namespace RequestManagementAPI.Models.Entities
+namespace RequestManagement.Domain.Models.Entities
 {
     public class CustomerGroup
     {
+        [Key]
         public int CustomerGroupId { get; set; }
         public string GroupName { get; set; }
         public string Description { get; set; }

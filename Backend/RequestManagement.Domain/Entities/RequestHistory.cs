@@ -1,9 +1,10 @@
-using System;
+using System.ComponentModel.DataAnnotations;
 
-namespace RequestManagementAPI.Models.Entities
+namespace RequestManagement.Domain.Models.Entities
 {
     public class RequestHistory
     {
+        [Key]
         public int HistoryId { get; set; }
         public int RequestId { get; set; }
         public int UserId { get; set; }

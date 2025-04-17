@@ -47,7 +47,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const login = async (username: string, password: string) => {
     try {
       setIsLoading(true);
-      const response = await fetch('http://localhost:5000/api/auth/login', {
+      const response = await fetch('https://localhost:7041/api/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -88,7 +88,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const register = async (userData: any) => {
     try {
       setIsLoading(true);
-      const response = await fetch('http://localhost:5000/api/auth/register', {
+      const response = await fetch('https://localhost:7041/api/auth/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

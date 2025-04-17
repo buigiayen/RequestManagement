@@ -1,10 +1,10 @@
-using System;
-using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
-namespace RequestManagementAPI.Models.Entities
+namespace RequestManagement.Domain.Models.Entities
 {
     public class RequestCategory
     {
+        [Key]
         public int CategoryId { get; set; }
         public string CategoryName { get; set; }
         public string Description { get; set; }

@@ -1,9 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using RequestManagementAPI.Data;
+using RequestManagement.Infrastructure.Data;
 
-namespace RequestManagementAPI.Extensions
+namespace RequestManagement.Infrastructure.Extensions
 {
     public static class ServiceExtensions
     {
@@ -11,8 +11,7 @@ namespace RequestManagementAPI.Extensions
         {
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
-                    configuration.GetConnectionString("DefaultConnection"),
-                    b => b.MigrationsAssembly("RequestManagementAPI")));
+                    configuration.GetConnectionString("DefaultConnection")));
         }
     }
 }

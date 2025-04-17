@@ -1,12 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
-using RequestManagementAPI.Data;
-using RequestManagementAPI.Models.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using RequestManagement.Infrastructure.Data;
+using RequestManagement.Domain.Models.Entities;
+
+
 
 namespace RequestManagementAPI.Controllers
 {

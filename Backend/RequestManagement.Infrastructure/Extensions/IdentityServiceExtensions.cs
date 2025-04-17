@@ -3,10 +3,10 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using RequestManagementAPI.Models.Entities;
 using System.Text;
+using RequestManagement.Domain.Models.Entities;
 
-namespace RequestManagementAPI.Extensions
+namespace RequestManagement.Infrastructure.Extensions
 {
     public static class IdentityServiceExtensions
     {

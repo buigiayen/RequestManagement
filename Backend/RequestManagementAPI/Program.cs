@@ -1,15 +1,12 @@
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
+
 using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+
 using Microsoft.OpenApi.Models;
-using RequestManagementAPI.Data;
-using RequestManagementAPI.Extensions;
-using RequestManagementAPI.Models.Entities;
-using RequestManagementAPI.Seeds;
-using System;
+using RequestManagement.Domain.Models.Entities;
+using RequestManagement.Infrastructure.Data;
+using RequestManagement.Infrastructure.Extensions;
+using RequestManagement.Infrastructure.Seeds;
+
 
 namespace RequestManagementAPI
 {

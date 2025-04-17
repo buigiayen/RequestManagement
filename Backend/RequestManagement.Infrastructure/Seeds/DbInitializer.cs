@@ -1,13 +1,10 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using RequestManagementAPI.Data;
-using RequestManagementAPI.Models.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using RequestManagement.Domain.Models.Entities;
+using RequestManagement.Infrastructure.Data;
 
-namespace RequestManagementAPI.Seeds
+
+namespace RequestManagement.Infrastructure.Seeds
 {
     public static class DbInitializer
     {

@@ -1,10 +1,10 @@
-using System;
-using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
-namespace RequestManagementAPI.Models.Entities
+namespace RequestManagement.Domain.Models.Entities
 {
     public class RequestStatus
     {
+        [Key]
         public int StatusId { get; set; }
         public string StatusName { get; set; }
         public string Description { get; set; }

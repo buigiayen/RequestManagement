@@ -1,9 +1,10 @@
-using System;
+using System.ComponentModel.DataAnnotations;
 
-namespace RequestManagementAPI.Models.Entities
+namespace RequestManagement.Domain.Models.Entities
 {
     public class Notification
     {
+        [Key]
         public int NotificationId { get; set; }
         public int UserId { get; set; }
         public string Title { get; set; }

@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
-using RequestManagementAPI.Models.Entities;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using RequestManagement.Domain.Models.Entities;
 
 namespace RequestManagementAPI.Controllers
 {
