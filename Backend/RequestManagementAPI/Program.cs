@@ -22,16 +22,9 @@ namespace RequestManagementAPI
             builder.Services.ConfigureJWT(builder.Configuration);
 
             builder.Services.AddControllers();
-            
+
             // Add CORS
-            builder.Services.AddCors(options =>
-            {
-                options.AddPolicy("AllowAll", 
-                    builder => builder
-                        .AllowAnyOrigin()
-                        .AllowAnyMethod()
-                        .AllowAnyHeader());
-            });
+            builder.Services.AddCors();
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
@@ -104,8 +97,8 @@ namespace RequestManagementAPI
             }
 
             app.UseHttpsRedirection();
-            
-            app.UseCors("AllowAll");
+
+            app.UseCors(x => x.AllowAnyMethod().AllowAnyHeader().SetIsOriginAllowed(origin => true).AllowCredentials());
 
             app.UseAuthentication();
             app.UseAuthorization();
