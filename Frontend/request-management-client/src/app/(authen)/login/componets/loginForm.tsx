@@ -1,12 +1,9 @@
 "use client";
 import { Button, Form, Input } from "antd";
 import React, { useState } from "react";
-import { authen } from "@/services/authentications/authentication";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
-import { useRouter } from "next/navigation";
 import { useAuth } from "@/contexts/AuthContext";
 export default function LoginForm() {
-  const router = useRouter();
   const [form] = Form.useForm<AUTHENTICATION.LOGIN_REQUEST>();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const { login } = useAuth();

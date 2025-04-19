@@ -27,6 +27,7 @@ const StyledComponentsRegistry = ({
         theme={{
           token: {
             borderRadius: 0,
+            colorPrimary: "#346E4A"
           },
         }}
       >
