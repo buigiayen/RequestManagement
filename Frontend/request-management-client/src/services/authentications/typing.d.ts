@@ -24,5 +24,15 @@ namespace AUTHENTICATION {
     lastName: string;
     phoneNumber: string;
     role: string;
-  } 
+  }
+
+  export interface USER_PROFILE_RESPONSE {
+    id: number;
+    userName: string;
+    email: string;
+    firstName: string;
+    lastName: string;
+    phoneNumber: string;
+    roles: string[];
+  }
 }

@@ -16,7 +16,7 @@ const axiosInstance = createAxiosInstance();
 axiosInstance.interceptors.request.use((request) => {
   request.headers.set(
     "Authorization",
-    "bearer " + localStorage.getItem("token") || null
+    "bearer " + sessionStorage.getItem("token") || null
   );
   return request;
 });

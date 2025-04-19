@@ -1,21 +1,17 @@
 "use client";
 import { Button, Form, Input } from "antd";
-import React from "react";
+import React, { useState } from "react";
 import { authen } from "@/services/authentications/authentication";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
-
+import { useRouter } from "next/navigation";
+import { useAuth } from "@/contexts/AuthContext";
 export default function LoginForm() {
+  const router = useRouter();
   const [form] = Form.useForm<AUTHENTICATION.LOGIN_REQUEST>();
-
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const { login } = useAuth();
   const onFinish = async (values: AUTHENTICATION.LOGIN_REQUEST) => {
-    try {
-      var result = await authen.login({
-        body: { userName: values.userName, password: values.password },
-      });
-      console.log(result);
-    } catch (error) {
-      console.error("Login error:", error);
-    }
+    await login(values.userName, values.password);
   };
   return (
     <Form
@@ -26,7 +22,7 @@ export default function LoginForm() {
       layout="vertical"
     >
       <Form.Item
-        name='userName'
+        name="userName"
         rules={[{ required: true, message: "Vui lòng nhập tên đăng nhập!" }]}
       >
         <Input prefix={<UserOutlined />} placeholder="Tên đăng nhập" />
@@ -40,7 +36,7 @@ export default function LoginForm() {
       </Form.Item>
 
       <Form.Item>
-        <Button type="primary" htmlType="submit" block>
+        <Button loading={isLoading} type="primary" htmlType="submit" block>
           Đăng nhập
         </Button>
       </Form.Item>

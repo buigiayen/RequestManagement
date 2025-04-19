@@ -5,4 +5,8 @@ export const authen = {
     axiosInstance.post<AUTHENTICATION.LOGIN_RESPONSE>("/api/Auth/login", body),
   register: ({ body }: { body: AUTHENTICATION.REGISTER_REQUEST }) =>
     axiosInstance.post<BASE_MESSAGE.SUCCESS>("/api/Auth/register", body),
+  me: () =>
+    axiosInstance.get<AUTHENTICATION.USER_PROFILE_RESPONSE>(
+      "/api/Users/profile"
+    ),
 };

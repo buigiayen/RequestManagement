@@ -1,8 +1,15 @@
-'use client';
+"use client";
 
-import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { message } from 'antd';
-import { useRouter } from 'next/navigation';
+import {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  ReactNode,
+} from "react";
+import { message } from "antd";
+import { useRouter } from "next/navigation";
+import { authen } from "@/services/authentications/authentication";
 
 interface User {
   id: number;
@@ -33,44 +40,42 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     // Check if user is logged in
-    const storedToken = localStorage.getItem('token');
-    const storedUser = localStorage.getItem('user');
-    
+    const storedToken = localStorage.getItem("token");
+    const storedUser = localStorage.getItem("user");
+
     if (storedToken && storedUser) {
       setToken(storedToken);
       setUser(JSON.parse(storedUser));
     }
-    
+
     setIsLoading(false);
   }, []);
 
   const login = async (username: string, password: string) => {
     try {
       setIsLoading(true);
-      const response = await fetch('https://localhost:7041/api/auth/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ userName: username, password }),
+      const response = await authen.login({
+        body: { userName: username, password: password },
       });
 
-      if (!response.ok) {
-        throw new Error('Login failed');
+      if (response.status !== 200) {
+        throw new Error("Login failed");
       }
 
-      const data = await response.json();
+      const data = await response.data;
       setToken(data.token);
       setUser(data.user);
-      
-      localStorage.setItem('token', data.token);
-      localStorage.setItem('user', JSON.stringify(data.user));
-      
-      message.success('Đăng nhập thành công!');
-      router.push('/dashboard');
+
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("user", JSON.stringify(data.user));
+
+      message.success("Đăng nhập thành công!");
+      router.push("/dashboard");
     } catch (error) {
-      message.error('Đăng nhập thất bại. Vui lòng kiểm tra tên đăng nhập và mật khẩu.');
-      console.error('Login error:', error);
+      message.error(
+        "Đăng nhập thất bại. Vui lòng kiểm tra tên đăng nhập và mật khẩu."
+      );
+      console.error("Login error:", error);
     } finally {
       setIsLoading(false);
     }
@@ -79,32 +84,26 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const logout = () => {
     setUser(null);
     setToken(null);
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
-    router.push('/login');
-    message.success('Đã đăng xuất thành công');
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    router.push("/login");
+    message.success("Đã đăng xuất thành công");
   };
 
   const register = async (userData: any) => {
     try {
       setIsLoading(true);
-      const response = await fetch('https://localhost:7041/api/auth/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(userData),
-      });
+      const response = await authen.register({ body: userData });
 
-      if (!response.ok) {
-        throw new Error('Registration failed');
+      if (response.status !== 201) {
+        throw new Error("Registration failed");
       }
 
-      message.success('Đăng ký thành công! Vui lòng đăng nhập.');
-      router.push('/login');
+      message.success("Đăng ký thành công! Vui lòng đăng nhập.");
+      router.push("/login");
     } catch (error) {
-      message.error('Đăng ký thất bại. Vui lòng thử lại.');
-      console.error('Registration error:', error);
+      message.error("Đăng ký thất bại. Vui lòng thử lại.");
+      console.error("Registration error:", error);
     } finally {
       setIsLoading(false);
     }
@@ -130,7 +129,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 export const useAuth = () => {
   const context = useContext(AuthContext);
   if (context === undefined) {
-    throw new Error('useAuth must be used within an AuthProvider');
+    throw new Error("useAuth must be used within an AuthProvider");
   }
   return context;
 };
