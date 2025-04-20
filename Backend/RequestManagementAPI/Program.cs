@@ -6,6 +6,9 @@ using RequestManagement.Domain.Models.Entities;
 using RequestManagement.Infrastructure.Data;
 using RequestManagement.Infrastructure.Extensions;
 using RequestManagement.Infrastructure.Seeds;
+using System.Text.Json.Serialization;
+using System.Text.Json;
+using Microsoft.AspNetCore.Mvc.Formatters;
 
 
 namespace RequestManagementAPI
@@ -21,7 +24,8 @@ namespace RequestManagementAPI
             builder.Services.ConfigureIdentity();
             builder.Services.ConfigureJWT(builder.Configuration);
 
-            builder.Services.AddControllers();
+            builder.Services.AddControllers().AddJsonOptions(x =>
+                x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
             // Add CORS
             builder.Services.AddCors();

@@ -1,36 +1,73 @@
 // src/infrastructure/api/axiosInstance.ts
-import axios from "axios";
+import axios, {
+  AxiosError,
+  AxiosInstance,
+  InternalAxiosRequestConfig,
+} from "axios";
 
-const createAxiosInstance = () => {
-  return axios.create({
-    baseURL:
-      process.env.NODE_ENV === "development" ? process.env.NEXT_PUBLIC_URL : "",
-    withCredentials: true,
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-};
+const API_BASE_URL = process.env.REACT_APP_API_URL || "https://localhost:7041";
 
-const axiosInstance = createAxiosInstance();
-axiosInstance.interceptors.request.use((request) => {
-  request.headers.set(
-    "Authorization",
-    "bearer " + sessionStorage.getItem("token") || null
-  );
-  return request;
-});
-axiosInstance.interceptors.response.use(
-  (response) => response,
-  async (error) => {
-    const originalRequest = error.config;
-    if (error.response.status === 401 && !originalRequest._retry) {
-      if (typeof window !== "undefined") {
-        window.location.href = "/login";
-      }
-    }
-    return Promise.reject(error);
+class AxiosService {
+  private static instance: AxiosInstance;
+
+  private static createInstance(): AxiosInstance {
+    return axios.create({
+      baseURL: API_BASE_URL,
+      withCredentials: true,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      timeout: 10000, // Timeout 10s
+    });
   }
-);
 
-export default axiosInstance;
+  public static getInstance(): AxiosInstance {
+    if (!this.instance) {
+      this.instance = this.createInstance();
+      this.setupInterceptors();
+    }
+    return this.instance;
+  }
+
+  private static setupInterceptors(): void {
+    this.instance.interceptors.request.use(
+      (config: InternalAxiosRequestConfig) => {
+        const token = localStorage.getItem("token");
+        if (token) {
+          config.headers.Authorization = `Bearer ${token}`;
+        }
+        return config;
+      },
+      (error: AxiosError) => {
+        return Promise.reject(error);
+      }
+    );
+
+    this.instance.interceptors.response.use(
+      (response) => response,
+      async (error: AxiosError) => {
+        const originalRequest = error.config;
+
+        if (error.response?.status === 401) {
+          // Handle unauthorized access
+          sessionStorage.removeItem("token");
+          if (
+            typeof window !== "undefined" &&
+            !window.location.pathname.includes("/login")
+          ) {
+            window.location.href = "/login";
+          }
+        }
+
+        if (error.response?.status === 403) {
+          // Handle forbidden access
+          console.error("Access forbidden");
+        }
+
+        return Promise.reject(error);
+      }
+    );
+  }
+}
+
+export default AxiosService.getInstance();

@@ -42,7 +42,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
     {
       key: "/customer-groups",
       icon: <TeamOutlined />,
-      label: <Link href="/customer-groups">Nhóm khách hàng</Link>,
+      label: <Link href="/customers/customer">Nhóm khách hàng</Link>,
       roles: ["Admin", "Manager"],
     },
     {
