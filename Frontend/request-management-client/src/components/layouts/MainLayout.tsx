@@ -1,7 +1,6 @@
 "use client";
-
-import React from "react";
-import { Layout, Menu, Button, Avatar, Dropdown, theme } from "antd";
+import React, { useState } from "react";
+import { Layout, Menu, Button, Avatar, Dropdown } from "antd";
 import {
   UserOutlined,
   TeamOutlined,
@@ -10,6 +9,7 @@ import {
   LogoutOutlined,
   MenuFoldOutlined,
   MenuUnfoldOutlined,
+  HomeOutlined,
 } from "@ant-design/icons";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -20,43 +20,57 @@ const { Header, Sider, Content } = Layout;
 interface MainLayoutProps {
   children: React.ReactNode;
 }
-
+type MenuItem = {
+  key: string;
+  icon: React.ReactNode;
+  label: React.ReactNode;
+  text?: string;
+  roles?: string[]; // Optional roles property
+};
 const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
-  const { useToken } = theme;
-  const [collapsed, setCollapsed] = React.useState(false);
+  const [collapsed, setCollapsed] = useState<boolean>(false);
+  const [menuInfo, setMenuInfo] = useState<MenuItem>();
   const pathname = usePathname();
   const { user, logout } = useAuth();
-
-  const menuItems = [
+  const menuBase = [
     {
       key: "/dashboard",
       icon: <DashboardOutlined />,
-      label: <Link href="/dashboard">Dashboard</Link>,
+      text: "Dashboard",
     },
     {
       key: "/customers",
       icon: <TeamOutlined />,
-      label: <Link href="/customers">Khách hàng</Link>,
+      text: "Khách hàng",
       roles: ["Admin", "Manager", "Staff"],
     },
     {
       key: "/customer-groups",
       icon: <TeamOutlined />,
-      label: <Link href="/customers/customer">Nhóm khách hàng</Link>,
+      text: "Khách hàng",
+      link: "/customers/customer",
       roles: ["Admin", "Manager"],
     },
     {
       key: "/requests",
       icon: <FileTextOutlined />,
-      label: <Link href="/requests">Yêu cầu</Link>,
+      text: "Yêu cầu",
     },
     {
       key: "/users",
       icon: <UserOutlined />,
-      label: <Link href="/users">Người dùng</Link>,
+      text: "Người dùng",
       roles: ["Admin", "Manager"],
     },
   ];
+
+  const menuItems: MenuItem[] = menuBase.map((item) => ({
+    key: item.key,
+    icon: item.icon,
+    label: <Link href={item.link ?? item.key}>{item.text}</Link>,
+    text: item.text,
+    roles: item.roles,
+  }));
 
   // Filter menu items based on user roles
   const filteredMenuItems = menuItems.filter((item) => {
@@ -84,7 +98,6 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
         trigger={null}
         collapsible
         collapsed={collapsed}
-        theme="dark"
         style={{
           overflow: "auto",
           height: "100vh",
@@ -93,7 +106,11 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
           top: 0,
           bottom: 0,
           boxShadow: "2px 0 8px 0 rgba(29,35,41,.05)",
+          width: collapsed ? 80 : 250, // Adjusted width
+          color: "#f5f5f5",
         }}
+        width={260} // Set the expanded width
+        collapsedWidth={80} // Set the collapsed width
       >
         <div
           style={{
@@ -127,17 +144,21 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
           </small>
         </div>
         <Menu
-          theme="dark"
+          theme="light"
           mode="inline"
-          selectedKeys={[pathname]}
+          selectedKeys={[pathname ?? ""]}
           items={filteredMenuItems}
           style={{
             borderRight: 0,
           }}
+          onClick={(e) => {
+            setMenuInfo(menuItems.find((item) => item.key === e.key));
+          }}
         />
       </Sider>
+
       <Layout
-        style={{ marginLeft: collapsed ? 80 : 200, transition: "all 0.2s" }}
+        style={{ marginLeft: collapsed ? 80 : 260, transition: "all 0.2s" }}
       >
         <Header
           style={{
@@ -170,7 +191,6 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
                     <label
                       style={{
                         fontWeight: "bold",
-                        color: useToken().token.colorPrimary,
                       }}
                     >
                       {user.firstName} {user.lastName}
@@ -181,9 +201,44 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
             )}
           </div>
         </Header>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "start",
+            padding: 15,
+            marginLeft: 16,
+            marginRight: 16,
+            marginTop: 10,
+            height: 50,
+            background: "#fff",
+            borderRadius: 8,
+            boxShadow: "0 2px 8px rgba(0,0,0,0.08)",
+            paddingBottom: 10,
+          }}
+        >
+          <div
+            style={{ display: "flex", alignItems: "center", marginRight: 10 }}
+          >
+            <span style={{ fontSize: "22px" }}>{menuInfo?.icon}</span>
+          </div>
+          <div>
+            <span style={{ color: "black", fontWeight: "bold" }}>
+              {menuInfo?.text}
+            </span>
+            <br />
+            <small style={{ color: "#979797" }}>Ghi chú</small>
+          </div>
+          <div style={{ marginLeft: "auto", color: "#979797" }}>
+            <HomeOutlined></HomeOutlined> / {menuInfo?.label}
+          </div>
+        </div>
+
         <Content
           style={{
-            margin: "24px 16px",
+            marginLeft: 16,
+            marginRight: 16,
+            marginTop: 10,
             padding: 24,
             background: "#fff",
             minHeight: 280,

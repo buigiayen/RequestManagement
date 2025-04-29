@@ -18,6 +18,7 @@ namespace RequestManagement.Infrastructure.Seeds
             await SeedRequestCategories(context);
             await SeedRequestPriorities(context);
             await SeedRequestStatuses(context);
+            await SeedCustomerGroups(context);
         }
 
         private static async Task SeedRoles(RoleManager<IdentityRole<int>> roleManager)
@@ -170,6 +171,26 @@ namespace RequestManagement.Infrastructure.Seeds
                 };
 
                 context.RequestStatuses.AddRange(statuses);
+                await context.SaveChangesAsync();
+            }
+        }
+        private static async Task SeedCustomerGroups(ApplicationDbContext context)
+        {
+            if (!context.CustomerGroups.Any())
+            {
+                var customerGroup = new List<CustomerGroup>
+                {
+                    new CustomerGroup { GroupName = "Khách hàng tiềm năng", Description = "Những khách hàng có tiềm năng hợp tác trong tương lai." , CreatedBy=1, CreatedAt= DateTime.UtcNow},
+                    new CustomerGroup { GroupName = "Khách hàng thường xuyên", Description = "Những khách hàng thường xuyên sử dụng sản phẩm/dịch vụ." , CreatedBy=1, CreatedAt= DateTime.UtcNow },
+                    new CustomerGroup { GroupName = "Khách hàng mới", Description = "Những khách hàng mới bắt đầu sử dụng sản phẩm/dịch vụ." , CreatedBy=1, CreatedAt= DateTime.UtcNow },
+                    new CustomerGroup { GroupName = "Khách hàng doanh nghiệp", Description = "Những khách hàng là các tổ chức hoặc doanh nghiệp." , CreatedBy=1, CreatedAt= DateTime.UtcNow },
+                    new CustomerGroup { GroupName = "Khách hàng cá nhân", Description = "Những khách hàng là cá nhân sử dụng sản phẩm/dịch vụ." , CreatedBy=1, CreatedAt= DateTime.UtcNow },
+                    new CustomerGroup { GroupName = "Khách hàng quốc tế", Description = "Những khách hàng đến từ các quốc gia khác." , CreatedBy=1, CreatedAt= DateTime.UtcNow },
+                    new CustomerGroup { GroupName = "Khách hàng đặc biệt", Description = "Những khách hàng có yêu cầu hoặc điều kiện đặc biệt." , CreatedBy=1, CreatedAt= DateTime.UtcNow }
+
+                };
+
+                context.CustomerGroups.AddRange(customerGroup);
                 await context.SaveChangesAsync();
             }
         }

@@ -10,6 +10,7 @@ import {
 import { message } from "antd";
 import { useRouter } from "next/navigation";
 import { authen } from "@/services/authentications/authentication";
+import MainLayout from "@/components/layouts/MainLayout";
 
 interface User {
   id: number;
