@@ -5,5 +5,7 @@ declare namespace Services {
     label: string;
     description?: string;
     price: number;
+    imageUrl: string;
+    
   }
 }
