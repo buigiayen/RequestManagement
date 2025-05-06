@@ -47,7 +47,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
     {
       key: "/customer-groups",
       icon: <TeamOutlined />,
-      text: "Khách hàng",
+      text: "Nhóm Khách hàng",
       link: "/customers/customer",
       roles: ["Admin", "Manager"],
     },
@@ -107,7 +107,6 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
           bottom: 0,
           boxShadow: "2px 0 8px 0 rgba(29,35,41,.05)",
           width: collapsed ? 80 : 250, // Adjusted width
-          color: "#f5f5f5",
         }}
         width={260} // Set the expanded width
         collapsedWidth={80} // Set the collapsed width
@@ -144,7 +143,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
           </small>
         </div>
         <Menu
-          theme="light"
+          theme="dark"
           mode="inline"
           selectedKeys={[pathname ?? ""]}
           items={filteredMenuItems}
@@ -201,38 +200,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
             )}
           </div>
         </Header>
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "start",
-            padding: 15,
-            marginLeft: 16,
-            marginRight: 16,
-            marginTop: 10,
-            height: 50,
-            background: "#fff",
-            borderRadius: 8,
-            boxShadow: "0 2px 8px rgba(0,0,0,0.08)",
-            paddingBottom: 10,
-          }}
-        >
-          <div
-            style={{ display: "flex", alignItems: "center", marginRight: 10 }}
-          >
-            <span style={{ fontSize: "22px" }}>{menuInfo?.icon}</span>
-          </div>
-          <div>
-            <span style={{ color: "black", fontWeight: "bold" }}>
-              {menuInfo?.text}
-            </span>
-            <br />
-            <small style={{ color: "#979797" }}>Ghi chú</small>
-          </div>
-          <div style={{ marginLeft: "auto", color: "#979797" }}>
-            <HomeOutlined></HomeOutlined> / {menuInfo?.label}
-          </div>
-        </div>
+
 
         <Content
           style={{
