@@ -5,10 +5,9 @@ import {
   BreadcrumbItem,
   BreadcrumbLink,
   BreadcrumbList,
-  BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import { BeakerIcon, HomeIcon } from "lucide-react";
+import { HomeIcon } from "lucide-react";
 
 const BreadcrumbWrapper: React.FC = () => {
   const router = useRouter();
@@ -31,9 +30,9 @@ const BreadcrumbWrapper: React.FC = () => {
   };
 
   const breadcrumbItems = generateBreadcrumbItems();
-  console.log(breadcrumbItems);
+
   return (
-    <Breadcrumb>
+    <Breadcrumb className="pr-4">
       <BreadcrumbList>
         {breadcrumbItems.map((item, index) => (
           <React.Fragment key={index}>

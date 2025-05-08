@@ -1,31 +1,40 @@
 import { Button } from "@/components/ui/button";
-import { AccessibilityIcon } from "lucide-react";
+import { CalculatorIcon, Check, HelpCircle } from "lucide-react";
 import Image from "next/image";
 
 const OrderServices = (props: Services.Service) => {
   return (
-    <div className="rounded-lg shadow-md border p-4 hover:shadow-lg transition-shadow duration-300">
+    <div className="rounded-lg shadow-md border p-4 hover:shadow-lg  ">
       <Image
-        src="https://console.emcvietnam.vn:9000/requestmanager-object/images/1.png"
+        src={props.imageUrl!}
         alt="Service/Image"
         width={1000}
         height={1000}
-        className="rounded-lg w-full"
+        className="rounded-lg w-full duration-300 transition-all  transform hover:scale-105"
       />
       <h2 className="mt-2 ">Ứng dụng: {props.label}</h2>
-      <p className="text-sm text-[#979797]">
+      <p className="text-sm text-[#979797]" suppressHydrationWarning>
         {(props.price * 1000).toLocaleString() + " VNĐ / 1000 người dùng"}
       </p>
-      <Button className="text-sm w-full mt-2 flex items-center justify-center gap-2">
-        <AccessibilityIcon className="h-4 w-4" /> Đăng ký sử dụng
+      <Button
+        variant="outline"
+        className="text-sm w-full mt-2 flex items-center justify-center gap-2"
+      >
+        <Check className="h-4 w-4" /> Sử dụng
       </Button>
 
       <div className="flex gap-2 mt-2">
-        <Button className="text-sm flex-1 flex items-center justify-center gap-2 bg-[#E3E3E3] hover:bg-[#D1D1D1]">
-          <AccessibilityIcon className="h-4 w-4" /> Hướng dẫn sử dụng
+        <Button
+          variant="outline"
+          className="text-sm flex-1 flex items-center justify-center gap-2 "
+        >
+          <HelpCircle className="h-4 w-4" /> Hướng dẫn sử dụng
         </Button>
-        <Button className="text-sm flex-1 flex items-center justify-center gap-2">
-          <AccessibilityIcon className="h-4 w-4" /> Đăng ký sử dụng
+        <Button
+          variant="outline"
+          className="text-sm flex-1 flex items-center justify-center gap-2"
+        >
+          <CalculatorIcon className="h-4 w-4" /> Mua thêm người dùng
         </Button>
       </div>
     </div>

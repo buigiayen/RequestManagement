@@ -3,13 +3,47 @@ export const mockServices: Services.Service[] = [
     id: "1",
     slug: "QLDT",
     label: "Quản lý đào tạo",
-    description: `# Web Development Service
-This service includes:
-- Building responsive websites
-- Frontend and backend development
-- Integration with APIs
+    description: `# Quản Lý Đào Tạo Lái Xe
+
+## Giới Thiệu
+Dịch vụ **Quản Lý Đào Tạo Lái Xe** được thiết kế để hỗ trợ các trung tâm đào tạo lái xe quản lý toàn diện các hoạt động đào tạo, từ đăng ký học viên đến cấp chứng chỉ.
+
+---
+
+## Tính Năng Nổi Bật
+- **Quản lý học viên**: Theo dõi thông tin, tiến độ học tập và kết quả thi của học viên.
+- **Lịch học linh hoạt**: Tạo và quản lý lịch học, lịch thi một cách dễ dàng.
+- **Báo cáo chi tiết**: Cung cấp báo cáo về hiệu quả đào tạo, tỷ lệ đậu và các chỉ số quan trọng khác.
+- **Tích hợp công nghệ hiện đại**: Hỗ trợ tích hợp với các thiết bị giám sát và phần mềm khác.
+
+---
+
+## Lợi Ích
+- **Tiết kiệm thời gian**: Tự động hóa các quy trình quản lý, giảm thiểu công việc thủ công.
+- **Tăng hiệu quả**: Giúp trung tâm đào tạo hoạt động hiệu quả hơn với các công cụ quản lý mạnh mẽ.
+- **Nâng cao trải nghiệm học viên**: Cung cấp thông tin minh bạch và hỗ trợ học viên tốt hơn.
+
+---
+
+## Giá Cả
+- **Gói cơ bản**: 1.500.000 VNĐ/tháng
+- **Gói nâng cao**: 2.500.000 VNĐ/tháng (bao gồm hỗ trợ kỹ thuật 24/7 và các tính năng mở rộng)
+
+---
+
+## Liên Hệ
+Hãy liên hệ với chúng tôi để được tư vấn chi tiết và trải nghiệm dịch vụ:
+- **Hotline**: 1900-123-456
+- **Email**: support@daotaolaixe.vn
+- **Website**: [www.daotaolaixe.vn](http://www.daotaolaixe.vn)
+
+---
+
+> **Lưu ý**: Dịch vụ của chúng tôi luôn cập nhật để đáp ứng các yêu cầu mới nhất từ Bộ Giao Thông Vận Tải.
     `,
     price: 1500,
+    imageUrl:
+      "https://console.emcvietnam.vn:9000/requestmanager-object/images/1.png",
   },
   {
     id: "2",
@@ -22,6 +56,8 @@ We provide:
 - App store deployment
     `,
     price: 2500,
+    imageUrl:
+      "https://console.emcvietnam.vn:9000/requestmanager-object/images/1.png",
   },
   {
     id: "3",
@@ -34,5 +70,7 @@ Our SEO services include:
 - Monthly performance reports
     `,
     price: 800,
+    imageUrl:
+      "https://console.emcvietnam.vn:9000/requestmanager-object/images/1.png",
   },
 ];

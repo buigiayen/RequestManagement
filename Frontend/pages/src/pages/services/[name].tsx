@@ -47,17 +47,17 @@ export default function PageServices(
         <BreadcrumbWrapper></BreadcrumbWrapper>
       </div>
       <br></br>
-      <div style={{ display: "flex" }}>
+      <div style={{ display: "flex", width: "100%" }}>
         <div
           style={{
-            flex: 4, // Increased from 1 to make it larger relative to last div
+            flex: 4,
             padding: "1rem",
             borderRight: "1px solid #ccc",
           }}
         >
           <MarkdownRenderer markdown={props.description!}></MarkdownRenderer>
         </div>
-        <div style={{ flex: 1, padding: "1rem" }}>
+        <div style={{ flex: 1, padding: "1rem", marginLeft: "auto" }}>
           <OrderServices {...props}></OrderServices>
         </div>
       </div>
