@@ -7,7 +7,7 @@ interface MarkdownRendererProps {
 
 const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ markdown }) => {
   return (
-    <div className="markdown-container">
+    <div className="container mx-auto max-w-3xl p-4">
       <ReactMarkdown>{markdown}</ReactMarkdown>
     </div>
   );

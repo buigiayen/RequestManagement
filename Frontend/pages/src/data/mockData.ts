@@ -42,8 +42,12 @@ Hãy liên hệ với chúng tôi để được tư vấn chi tiết và trải
 > **Lưu ý**: Dịch vụ của chúng tôi luôn cập nhật để đáp ứng các yêu cầu mới nhất từ Bộ Giao Thông Vận Tải.
     `,
     price: 1500,
-    imageUrl:
-      "https://console.emcvietnam.vn:9000/requestmanager-object/images/1.png",
+    images: [
+      "https://hanoicomputercdn.com/media/product/81002_gia_do_man_may_tinh_north_bayou_f160_mau_xam_1.jpg",
+      "https://hanoicomputercdn.com/media/product/81002_gia_do_man_may_tinh_north_bayou_f160_mau_xam_2.jpg",
+      "https://hanoicomputercdn.com/media/product/81002_gia_do_man_may_tinh_north_bayou_f160_mau_xam_3.jpg",
+      "https://hanoicomputercdn.com/media/product/81002_gia_do_man_may_tinh_north_bayou_f160_mau_xam_4.jpg",
+    ],
   },
   {
     id: "2",
@@ -56,8 +60,10 @@ We provide:
 - App store deployment
     `,
     price: 2500,
-    imageUrl:
+    images: [
       "https://console.emcvietnam.vn:9000/requestmanager-object/images/1.png",
+      "https://console.emcvietnam.vn:9000/requestmanager-object/images/2.png",
+    ],
   },
   {
     id: "3",
@@ -70,7 +76,9 @@ Our SEO services include:
 - Monthly performance reports
     `,
     price: 800,
-    imageUrl:
+    images: [
       "https://console.emcvietnam.vn:9000/requestmanager-object/images/1.png",
+      "https://console.emcvietnam.vn:9000/requestmanager-object/images/2.png",
+    ],
   },
 ];

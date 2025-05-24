@@ -1,8 +1,8 @@
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import { mockServices } from "@/data/mockData";
-import MarkdownRenderer from "./components/markdown.services";
 import BreadcrumbWrapper from "../components/Breadcrumb/Breadcrumb.componet";
 import OrderServices from "./components/order.services";
+import ListImage from "@/components/customer/list.Image";
 
 export const getServerSideProps: GetServerSideProps<Services.Service> = async (
   context
@@ -18,8 +18,8 @@ export default function PageServices(
   props: InferGetServerSidePropsType<typeof getServerSideProps>
 ) {
   return (
-    <div className="flex flex-col items-start  pt-2 pl-2 pr-2">
-      <div className="flex justify-between items-center w-full">
+    <div className="flex flex-col items-start  pt-2 pl-2 pr-2   ">
+      <div className="flex justify-between items-center w-full bg-white rounded-md">
         <div className="flex items-center space-x-2">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -47,17 +47,13 @@ export default function PageServices(
         <BreadcrumbWrapper></BreadcrumbWrapper>
       </div>
       <br></br>
-      <div style={{ display: "flex", width: "100%" }}>
-        <div
-          style={{
-            flex: 4,
-            padding: "1rem",
-            borderRight: "1px solid #ccc",
-          }}
-        >
-          <MarkdownRenderer markdown={props.description!}></MarkdownRenderer>
+      <div className="grid grid-cols-4 gap-4 w-full container">
+        <div className="col-span-1">{/* Column 1 left empty */}</div>
+        <div className="col-span-2">
+          <ListImage images={props.images as string[]}></ListImage>
         </div>
-        <div style={{ flex: 1, padding: "1rem", marginLeft: "auto" }}>
+        <div className="col-span-1">
+          {/* Column 3 contains order services */}
           <OrderServices {...props}></OrderServices>
         </div>
       </div>

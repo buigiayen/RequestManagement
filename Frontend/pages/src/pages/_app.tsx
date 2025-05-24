@@ -12,7 +12,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
       >
         <HeaderNavbar />
         <MenuNavbar />
-        <main>
+        <main className="bg-[#f4f4f4] ">
           <Component {...pageProps} />
         </main>
       </body>
