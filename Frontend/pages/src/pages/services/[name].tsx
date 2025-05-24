@@ -18,7 +18,7 @@ export default function PageServices(
   props: InferGetServerSidePropsType<typeof getServerSideProps>
 ) {
   return (
-    <div className="flex flex-col items-start  pt-2 pl-2 pr-2   ">
+    <div className=" pt-2 pl-2 pr-2">
       <div className="flex justify-between items-center w-full bg-white rounded-md">
         <div className="flex items-center space-x-2">
           <svg
@@ -46,15 +46,15 @@ export default function PageServices(
         </div>
         <BreadcrumbWrapper></BreadcrumbWrapper>
       </div>
-      <br></br>
-      <div className="grid grid-cols-4 gap-4 w-full container">
-        <div className="col-span-1">{/* Column 1 left empty */}</div>
-        <div className="col-span-2">
-          <ListImage images={props.images as string[]}></ListImage>
-        </div>
-        <div className="col-span-1">
-          {/* Column 3 contains order services */}
-          <OrderServices {...props}></OrderServices>
+
+      <div className="max-w-6xl mx-auto mt-6 bg-white rounded-md flex justify-center items-stretch p-6">
+        <div className="flex w-full">
+          <div className="flex-[2_2_0%] flex items-center justify-center">
+            <ListImage images={props.images as string[]} />
+          </div>
+          <div className="flex-[1_1_0%] flex">
+            <OrderServices {...props} />
+          </div>
         </div>
       </div>
     </div>
